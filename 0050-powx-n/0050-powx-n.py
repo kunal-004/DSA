@@ -1,17 +1,9 @@
 class Solution(object):
     def myPow(self, x, n):
-        if n == 0:
+        if not n:
             return 1
         if n < 0:
-            x = 1 / x
-            n = -n
-        return self._myPowRec(x, n)
-
-    def _myPowRec(self, x, n):
-        if n == 0:
-            return 1
-        half = self._myPowRec(x, n // 2)
-        if n % 2 == 0:
-            return half * half
-        else:
-            return half * half * x
+            return 1 / self.myPow(x, -n)
+        if n % 2:
+            return x * self.myPow(x, n-1)
+        return self.myPow(x*x, n/2)
